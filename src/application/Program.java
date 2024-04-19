@@ -50,6 +50,10 @@ public class Program {
 		sellerDao.deleteById(sc1.nextInt());
 		System.out.println("Deleted!");
 		
+		
+		
+		System.out.println("Congratulations!");
+		
 		sc1.close();
 	}
 

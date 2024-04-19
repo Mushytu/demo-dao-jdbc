@@ -5,12 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import db.DB;
 import db.DbException;
 import model.dao.DepartmentDao;
 import model.entities.Department;
+import model.entities.Seller;
 
 public class DepartmentDaoJDBCImpl implements DepartmentDao {
 
@@ -123,7 +127,30 @@ public class DepartmentDaoJDBCImpl implements DepartmentDao {
 
 	@Override
 	public List<Department> findAll() {
-		return null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		
+		try {
+			pst = conn.prepareStatement("SELECT * FROM department ORDER BY Name");
+			
+			rs = pst.executeQuery();
+			
+			List<Department> depList = new ArrayList<>();			
+			while (rs.next()) {
+				Department tempDep = new Department();
+				tempDep.setName(rs.getString("Name"));
+				tempDep.setId(rs.getInt("Id"));
+				depList.add(tempDep);
+			}
+			return depList;
+			
+		} catch (SQLException e1) {
+			throw new DbException(e1.getMessage());
+			
+		} finally {
+			DB.closeStatement(pst);
+			DB.closeResultSet(rs);
+		}
 	}
 
 }
