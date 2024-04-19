@@ -33,7 +33,14 @@ public class Program {
 		System.out.println("\n!!! *TEST 4: seller insert* !!!");
 		Seller newSeller = new Seller(null, "Greg", "greg@gmail.com", new Date(), 4000.0, new Department(2, null));
 		sellerDao.insert(newSeller);
-		System.out.printf("Inserted! New id = %d", newSeller.getId());
+		System.out.printf("Inserted! New id = %d\n", newSeller.getId());
+		
+		System.out.println("\n!!! *TEST 5: seller update* !!!");
+		seller = sellerDao.findById(1);
+		seller.setName("Marta Wayne");
+		seller.setEmail("martaw@gmail.com");
+		sellerDao.update(seller);
+		System.out.println("Update done!");
 	}
 
 }
