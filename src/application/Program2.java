@@ -14,6 +14,13 @@ public class Program2 {
 		Department newDep = new Department(null, "Beauty");
 		depDao.insert(newDep);
 		System.out.printf("Inserted! New id = %d\n", newDep.getId());
+		
+		System.out.println("\n!!! *TEST 2: Department update* !!!");
+		Department department = depDao.findById(1);
+		department.setName("Clothes");
+		depDao.update(department);
+		System.out.println("Update done!");
+		
 	}
 
 }
